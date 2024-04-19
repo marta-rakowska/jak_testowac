@@ -3,6 +3,8 @@ import unittest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from selenium.webdriver.remote.webelement import WebElement
+
 
 class LostHatTests(unittest.TestCase):
 
@@ -18,6 +20,16 @@ class LostHatTests(unittest.TestCase):
     @classmethod
     def tearDownClass(self):
         self.driver.quit()
+
+    def user_login(self, driver, user_email, user_pass):
+        login_input_element = driver.find_element(By.XPATH, '//*[@type="email"]')
+        login_input_element.send_keys(user_email)
+
+        password_input_element = driver.find_element(By.XPATH, '//*[@type="password"]')
+        password_input_element.send_keys(user_pass)
+
+        button_next_element = driver.find_element(By.XPATH, '//*[@id="submit-login"]')
+        button_next_element.click()
 
     def test_login_text_header(self):
         expected_text = 'Your account'
@@ -35,15 +47,7 @@ class LostHatTests(unittest.TestCase):
         driver = self.driver
         driver.get(self.login_url)
 
-        login_input_element = driver.find_element(By.XPATH, '//*[@type="email"]')
-        login_input_element.send_keys(user_email)
-
-        login_input_element = driver.find_element(By.XPATH, '//*[@name="password"]')
-        login_input_element.send_keys(user_pass)
-
-        button_next_element = driver.find_element(By.XPATH, '//*[@id="submit-login"]')
-        button_next_element.click()
-
+        self.user_login(driver, user_email, user_pass)
         header_element = driver.find_element(By.XPATH, '//a[@class="account"]/*[@class="hidden-sm-down"]')
         header_element_text = header_element.text
         self.assertEqual(expected_text, header_element_text,
@@ -51,7 +55,6 @@ class LostHatTests(unittest.TestCase):
 
     def test_check_product_name_and_price(self):
         expected_product_name = 'HUMMINGBIRD PRINTED T-SHIRT'
-        expected_product_price = 'PLN23.52'
         driver = self.driver
         driver.get(self.sample_product_url)
 
@@ -60,9 +63,25 @@ class LostHatTests(unittest.TestCase):
         self.assertEqual(expected_product_name, name_element_text,
                          f'Expected text differs from actual for page url: {self.sample_product_url}')
 
+    def test_check_product_price(self):
+        expected_product_price = 'PLN23.52'
+        driver = self.driver
+        driver.get(self.sample_product_url)
         price_element = driver.find_element(By.XPATH, '//*[@class="current-price"]//*[@itemprop="price"]')
         price_element_text = price_element.text
         self.assertEqual(expected_product_price, price_element_text,
                          f'Expected text differs from actual for page url: {self.sample_product_url}')
 
+    def test_incorrect_login(self):
+        expected_text = 'Authentication failed.'
+        user_email = 'invalid@test.test'
+        user_pass = 'abc123'
+        driver = self.driver
+        driver.get(self.login_url)
+
+        self.user_login(driver, user_email, user_pass)
+        alert_element = driver.find_element(By.XPATH, '//*[@class="alert alert-danger"]')
+        alert_element_text = alert_element.text
+        self.assertEqual(expected_text, alert_element_text,
+                         f'Expected title differs from actual title for page url: {self.login_url}')
 
