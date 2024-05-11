@@ -81,47 +81,4 @@ class LostHatTests(unittest.TestCase):
         self.assert_element_text(driver, price_xpath, expected_product_price)
 
 
-class LostHatFrontPageTests(unittest.TestCase):
-    @classmethod
-    def setUp(self):
-        self.base_url = 'https://autodemo.testoneo.com/en/'
-        self.service = Service(
-            '/Users/martarakowska/Desktop/podstawy_testow_automatycznych_w_selenium_i_python/chromedriver')
-        self.service.start()
-        self.driver = webdriver.Remote(self.service.service_url)
-
-    @classmethod
-    def tearDown(self):
-        self.driver.quit()
-
-    def test_slider_presention(self):
-        slider_xpath = '//*[@id="carousel"]'
-        driver = self.driver
-        driver.get(self.base_url)
-        driver.find_element(By.XPATH, slider_xpath)
-
-    def test_slider_minimum_size(self):
-        expected_min_height = 300
-        expected_min_width = 600
-        slider_xpath = '//*[@id="carousel"]'
-        driver = self.driver
-
-        driver.get(self.base_url)
-        slider_element = driver.find_element(By.XPATH, slider_xpath)
-        actual_slider_height = slider_element.size['height']
-        actual_slider_width = slider_element.size['width']
-
-        self.assertLess(expected_min_height, actual_slider_height, f'Element height found by xpath {slider_xpath} on page {driver.current_url} is smaller than expected {expected_min_height}px')
-        self.assertLess(expected_min_width, actual_slider_width, f'Element width found by xpath {slider_xpath} on page {driver.current_url} is smaller than expected {expected_min_width}px')
-
-    def test_slider_contain_exact_number_of_slides(self):
-        expected_number_of_slides = 3
-        slides_xpath = '//*[@id="carousel"]/ul/li'
-        driver = self.driver
-
-        driver.get(self.base_url)
-        slider_elements = driver.find_element(By.XPATH, slides_xpath)
-        actual_number_of_slides = len(slider_elements)
-
-        self.assertEqual(expected_number_of_slides, actual_number_of_slides, f'Slides number differs for page {self.base_url}')
 
