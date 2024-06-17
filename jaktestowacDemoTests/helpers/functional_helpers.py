@@ -17,3 +17,4 @@ def user_login(driver, user_email, user_pass):
 
     button_next_element = driver.find_element(By.XPATH, '//*[@id="submit-login"]')
     button_next_element.click()
+
