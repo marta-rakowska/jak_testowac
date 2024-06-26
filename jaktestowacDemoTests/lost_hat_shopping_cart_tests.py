@@ -1,8 +1,9 @@
-import time
 import unittest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+
+from jaktestowacDemoTests.helpers import operational_helpers as oh
 
 class LostHatShoppingCartTests(unittest.TestCase):
     @classmethod
@@ -32,10 +33,8 @@ class LostHatShoppingCartTests(unittest.TestCase):
         shopping_cart_button_element = driver.find_element(By.XPATH, shopping_cart_button_xpath)
         shopping_cart_button_element.click()
 
-        time.sleep(3)
-
-        confirmation_modal_element = driver.find_element(By.XPATH, confirmation_modal_title_xpath)
-
+        confirmation_modal_elements = oh.wait_for_elements(driver, confirmation_modal_title_xpath)
+        confirmation_modal_element = confirmation_modal_elements[0]
         self.assertEqual(expected_confirmation_modal_text, confirmation_modal_element.text)
 
 
