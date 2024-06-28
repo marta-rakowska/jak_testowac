@@ -4,6 +4,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
+from demo_tests.helpers import operational_helpers as oh
+
 class MainTests(unittest.TestCase):
 
     @classmethod
@@ -114,9 +116,9 @@ class LoginPageTests(unittest.TestCase):
         login_next_button_element = driver.find_element(By.XPATH, '//*[@id="login_next"]')
         login_next_button_element.click()
 
-        time.sleep(3)
+        # time.sleep(3)
 
-        login_next_button_element = driver.find_element(By.XPATH, '//*[@id="login_next"]')
+        login_next_button_element = oh.visibility_of_element_wait(driver, '//*[@id="login_next"]')
         new_login_button_text = login_next_button_element.text
 
         self.assertEqual('zaloguj się', new_login_button_text,
@@ -130,9 +132,9 @@ class LoginPageTests(unittest.TestCase):
         login_reminder_element = driver.find_element(By.XPATH, '//*[@id="ident_rem"]')
         login_reminder_element.click()
 
-        time.sleep(3)
+        # time.sleep(3)
 
-        popup_text_element = driver.find_element(By.XPATH, '//*[@class="shadowbox-content contact-popup"]/div/h2')
+        popup_text_element = oh.visibility_of_element_wait(driver, '//*[@class="shadowbox-content contact-popup"]/div/h2')
         popup_text_element_text = popup_text_element.text
 
         popup_text_element_close_button = driver.find_element(By.XPATH, '//*[@id="shadowbox"]/div/i')
@@ -154,9 +156,9 @@ class LoginPageTests(unittest.TestCase):
         button_next_element = driver.find_element(By.XPATH, '//*[@id="login_next"]')
         button_next_element.click()
 
-        time.sleep(3)
+        # time.sleep(3)
 
-        messages_element = driver.find_element(By.XPATH, '//*[@id="show_messages"]')
+        messages_element = oh.visibility_of_element_wait(driver, '//*[@id="show_messages"]')
         messages_element_text = messages_element.text
         self.assertEqual('Brak wiadomości', messages_element_text,
                          f'Expected login button text differ from actual: {messages_element_text}')

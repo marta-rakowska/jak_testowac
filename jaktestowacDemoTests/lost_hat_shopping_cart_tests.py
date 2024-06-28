@@ -2,8 +2,6 @@ import unittest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
 
 from jaktestowacDemoTests.helpers import operational_helpers as oh
 
@@ -34,11 +32,7 @@ class LostHatShoppingCartTests(unittest.TestCase):
         shopping_cart_button_element = driver.find_element(By.XPATH, shopping_cart_button_xpath)
         shopping_cart_button_element.click()
 
-        # confirmation_modal_elements = oh.wait_for_elements(driver, confirmation_modal_title_xpath)
-        # confirmation_modal_element = confirmation_modal_elements[0]
-        confirmation_modal_element = WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located((By.XPATH, confirmation_modal_title_xpath)),
-            f"Element for xpath: '{confirmation_modal_title_xpath}' and url: {driver.current_url} not found")
+        confirmation_modal_element = oh.visibility_of_element_wait(driver, confirmation_modal_title_xpath)
         self.assertEqual(expected_confirmation_modal_text, confirmation_modal_element.text)
 
 
