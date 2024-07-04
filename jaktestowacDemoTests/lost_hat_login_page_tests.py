@@ -3,7 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
-from jaktestowacDemoTests.helpers import functional_helpers as fh
+from helpers import functional_helpers as fh
 
 
 class LostHatLoginPageTests(unittest.TestCase):

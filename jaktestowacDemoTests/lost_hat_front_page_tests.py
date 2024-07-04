@@ -74,3 +74,17 @@ class LostHatFrontPageTests(unittest.TestCase):
 
         self.assertEqual(expected_number_of_products, actual_number_of_products,
                          f'Slides number differs for page {self.base_url}')
+
+    def test_featured_products_price_in_pln(self):
+        expected_product_price_currency = 'PLN'
+        products_price_xpath = '//*[@class="product-miniature js-product-miniature"]//*[@class="price"]'
+        driver = self.driver
+
+        driver.get(self.base_url)
+        product_price_elements = driver.find_elements(By.XPATH, products_price_xpath)
+
+        for product_price_element in product_price_elements:
+            price_element_text = product_price_element.get_attribute("textContent")
+            with self.subTest(price_element_text):
+                self.assertIn(expected_product_price_currency, price_element_text,
+                              f"Expected text not found in product description for page {self.base_url}")
