@@ -12,9 +12,13 @@ class LostHatLoginPageTests(unittest.TestCase):
     def setUp(self):
         self.base_url = 'https://autodemo.testoneo.com/en/'
         self.login_url = self.base_url + 'login'
-        self.service = Service('/Users/martarakowska/Desktop/podstawy_testow_automatycznych_w_selenium_i_python/chromedriver')
+        # self.service = Service('/Users/martarakowska/Desktop/podstawy_testow_automatycznych_w_selenium_i_python/chromedriver')
+        # self.service.start()
+        # self.driver = webdriver.Remote(self.service.service_url)
+        self.service = webdriver.ChromeService(
+            '/Users/martarakowska/Desktop/podstawy_testow_automatycznych_w_selenium_i_python/chromedriver')
         self.service.start()
-        self.driver = webdriver.Remote(self.service.service_url)
+        self.driver = webdriver.Chrome(service=self.service)
 
     @classmethod
     def tearDown(self):

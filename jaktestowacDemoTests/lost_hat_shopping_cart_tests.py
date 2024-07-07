@@ -9,10 +9,14 @@ class LostHatShoppingCartTests(unittest.TestCase):
     @classmethod
     def setUp(self):
         self.subpage_art_url = 'https://autodemo.testoneo.com/en/9-art'
-        self.service = Service(
+        # self.service = Service(
+        #     '/Users/martarakowska/Desktop/podstawy_testow_automatycznych_w_selenium_i_python/chromedriver')
+        # self.service.start()
+        # self.driver = webdriver.Remote(self.service.service_url)
+        self.service = webdriver.ChromeService(
             '/Users/martarakowska/Desktop/podstawy_testow_automatycznych_w_selenium_i_python/chromedriver')
         self.service.start()
-        self.driver = webdriver.Remote(self.service.service_url)
+        self.driver = webdriver.Chrome(service=self.service)
 
     @classmethod
     def tearDown(self):

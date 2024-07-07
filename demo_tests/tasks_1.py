@@ -1,9 +1,13 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 
-service = Service('/Users/martarakowska/Desktop/podstawy_testow_automatycznych_w_selenium_i_python/chromedriver')
+# service = Service('/Users/martarakowska/Desktop/podstawy_testow_automatycznych_w_selenium_i_python/chromedriver')
+# service.start()
+# driver = webdriver.Remote(service.service_url)
+service = webdriver.ChromeService(
+            '/Users/martarakowska/Desktop/podstawy_testow_automatycznych_w_selenium_i_python/chromedriver')
 service.start()
-driver = webdriver.Remote(service.service_url)
+driver = webdriver.Chrome(service=service)
 driver.get('https://sliding.toys/mystic-square/8-puzzle/daily/')
 
 title = driver.title

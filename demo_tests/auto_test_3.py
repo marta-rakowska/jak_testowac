@@ -10,9 +10,13 @@ class MainTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(self):
-        self.service = Service('/Users/martarakowska/Desktop/podstawy_testow_automatycznych_w_selenium_i_python/chromedriver')
+        # self.service = Service('/Users/martarakowska/Desktop/podstawy_testow_automatycznych_w_selenium_i_python/chromedriver')
+        # self.service.start()
+        # self.driver = webdriver.Remote(self.service.service_url)
+        self.service = webdriver.ChromeService(
+            '/Users/martarakowska/Desktop/podstawy_testow_automatycznych_w_selenium_i_python/chromedriver')
         self.service.start()
-        self.driver = webdriver.Remote(self.service.service_url)
+        self.driver = webdriver.Chrome(service=self.service)
 
     def test_demo_login(self):
         driver = self.driver
@@ -58,10 +62,14 @@ class LoginPageTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(self):
-        self.service = Service(
+        # self.service = Service(
+        #     '/Users/martarakowska/Desktop/podstawy_testow_automatycznych_w_selenium_i_python/chromedriver')
+        # self.service.start()
+        # self.driver = webdriver.Remote(self.service.service_url)
+        self.service = webdriver.ChromeService(
             '/Users/martarakowska/Desktop/podstawy_testow_automatycznych_w_selenium_i_python/chromedriver')
         self.service.start()
-        self.driver = webdriver.Remote(self.service.service_url)
+        self.driver = webdriver.Chrome(service=self.service)
 
     def test_exact_text_for_login_form_header(self):
         driver = self.driver

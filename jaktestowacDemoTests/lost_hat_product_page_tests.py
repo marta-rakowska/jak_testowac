@@ -11,9 +11,13 @@ class LostHatProductPageTests(unittest.TestCase):
         self.base_url = 'https://autodemo.testoneo.com/en/'
         self.login_url = self.base_url + 'login'
         self.sample_product_url = self.base_url + 'men/1-1-hummingbird-printed-t-shirt.html'
-        self.service = Service('/Users/martarakowska/Desktop/podstawy_testow_automatycznych_w_selenium_i_python/chromedriver')
+        # self.service = Service('/Users/martarakowska/Desktop/podstawy_testow_automatycznych_w_selenium_i_python/chromedriver')
+        # self.service.start()
+        # self.driver = webdriver.Remote(self.service.service_url)
+        self.service = webdriver.ChromeService(
+            '/Users/martarakowska/Desktop/podstawy_testow_automatycznych_w_selenium_i_python/chromedriver')
         self.service.start()
-        self.driver = webdriver.Remote(self.service.service_url)
+        self.driver = webdriver.Chrome(service=self.service)
 
     @classmethod
     def tearDown(self):

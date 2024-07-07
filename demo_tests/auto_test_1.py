@@ -1,10 +1,13 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 
-service = Service('/Users/martarakowska/Desktop/podstawy_testow_automatycznych_w_selenium_i_python/chromedriver')
-service.start()
-driver = webdriver.Remote(service.service_url)
+# service = Service('/Users/martarakowska/Desktop/podstawy_testow_automatycznych_w_selenium_i_python/chromedriver')
+# service.start()
+# driver = webdriver.Remote(service.service_url)
 # driver.get('https://demobank.jaktestowac.pl/logowanie_etap_1.html')
+service = webdriver.ChromeService('/Users/martarakowska/Desktop/podstawy_testow_automatycznych_w_selenium_i_python/chromedriver')
+service.start()
+driver = webdriver.Chrome(service=service)
 driver.get('https://demobank.jaktestowac.pl/logowanie_prod.html')
 
 title = driver.title
