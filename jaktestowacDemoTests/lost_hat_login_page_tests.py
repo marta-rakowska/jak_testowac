@@ -2,9 +2,10 @@ import unittest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.events import EventFiringWebDriver
 
 from helpers import functional_helpers as fh
-
+from helpers.screenshot_listener import ScreenshotListener
 
 class LostHatLoginPageTests(unittest.TestCase):
 
@@ -15,14 +16,15 @@ class LostHatLoginPageTests(unittest.TestCase):
         # self.service = Service('/Users/martarakowska/Desktop/podstawy_testow_automatycznych_w_selenium_i_python/chromedriver')
         # self.service.start()
         # self.driver = webdriver.Remote(self.service.service_url)
-        self.service = webdriver.ChromeService(
+        service = webdriver.ChromeService(
             '/Users/martarakowska/Desktop/podstawy_testow_automatycznych_w_selenium_i_python/chromedriver')
-        self.service.start()
-        self.driver = webdriver.Chrome(service=self.service)
+        service.start()
+        driver = webdriver.Chrome(service=service)
+        self.ef_driver = EventFiringWebDriver(driver, ScreenshotListener())
 
     @classmethod
     def tearDown(self):
-        self.driver.quit()
+        self.ef_driver.quit()
 
     def assert_element_text(self, driver, xpath, expected_text):
         """Comparing expected text with observed value from web element
@@ -39,7 +41,7 @@ class LostHatLoginPageTests(unittest.TestCase):
     def test_login_text_header(self):
         expected_text = 'Log in to your account'
         xpath = '//header[@class="page-header"]'
-        driver = self.driver
+        driver = self.ef_driver
 
         driver.get(self.login_url)
         self.assert_element_text(driver, xpath, expected_text)
@@ -49,7 +51,7 @@ class LostHatLoginPageTests(unittest.TestCase):
         user_name_xpath = '//a[@class="account"]/*[@class="hidden-sm-down"]'
         user_email = 'marta.testerka@test.com'
         user_pass = '0123456789'
-        driver = self.driver
+        driver = self.ef_driver
 
         driver.get(self.login_url)
         fh.user_login(driver, user_email, user_pass)
@@ -60,7 +62,7 @@ class LostHatLoginPageTests(unittest.TestCase):
         alert_xpath = '//*[@class="alert alert-danger"]'
         user_email = 'invalid@test.test'
         user_pass = 'abc123'
-        driver = self.driver
+        driver = self.ef_driver
 
         driver.get(self.login_url)
         fh.user_login(driver, user_email, user_pass)
