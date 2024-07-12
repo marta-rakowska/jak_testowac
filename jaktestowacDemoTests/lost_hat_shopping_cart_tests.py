@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.events import EventFiringWebDriver
+from helpers.wrappers import screenshot_decorator
 
 from helpers import operational_helpers as oh
 from helpers.screenshot_listener import ScreenshotListener
@@ -25,6 +26,7 @@ class LostHatShoppingCartTests(unittest.TestCase):
     def tearDown(self):
         self.ef_driver.quit()
 
+    @screenshot_decorator
     def test_adding_item_to_shopping_cart(self):
         expected_confirmation_modal_text = '\ue876Product successfully added to your shopping cart'
         item_xpath = '//*[@alt="Mountain fox - Vector graphics"]'
@@ -39,7 +41,7 @@ class LostHatShoppingCartTests(unittest.TestCase):
         shopping_cart_button_element = driver.find_element(By.XPATH, shopping_cart_button_xpath)
         shopping_cart_button_element.click()
 
-        confirmation_modal_element = oh.visibility_of_element_wait(driver, confirmation_modal_title_xpath)
+        confirmation_modal_element = oh.visibility_of_element_wait(driver, confirmation_modal_title_xpath, 1)
         self.assertEqual(expected_confirmation_modal_text, confirmation_modal_element.text)
 
 

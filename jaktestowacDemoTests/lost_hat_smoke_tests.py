@@ -5,6 +5,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.events import EventFiringWebDriver
 from helpers.screenshot_listener import ScreenshotListener
+from helpers.wrappers import screenshot_decorator
 
 class LostHatSmokeTests(unittest.TestCase):
 
@@ -28,22 +29,27 @@ class LostHatSmokeTests(unittest.TestCase):
     def tearDown(self):
         self.ef_driver.quit()
 
+    @screenshot_decorator
     def test_base_page_title(self):
         expected_title = 'Lost Hat'
         self.assert_title(self.base_url, expected_title)
 
+    @screenshot_decorator
     def test_product_art_page_title(self):
         expected_title = 'Art'
         self.assert_title(self.art_product_url, expected_title)
 
+    @screenshot_decorator
     def test_product_clothes_page_title(self):
         expected_title = 'Clothes'
         self.assert_title(self.clothes_product_url, expected_title)
 
+    @screenshot_decorator
     def test_product_accessories_page_title(self):
         expected_title = 'Accessories'
         self.assert_title(self.accessories_product_url, expected_title)
 
+    @screenshot_decorator
     def test_login_page_title(self):
         expected_title = 'Login'
         self.assert_title(self.login_url, expected_title)
@@ -57,6 +63,7 @@ class LostHatSmokeTests(unittest.TestCase):
         self.assertEqual(expected_title, actual_title, f'Expected title {expected_title} differs from actual title '
                                                        f'{actual_title} on page: {url}')
 
+    @screenshot_decorator
     def test_smoke_search_on_main_page(self):
         search_phrase = 'mug'
         search_input_xpath = '//*[@name="s"]'
