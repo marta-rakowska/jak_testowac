@@ -1,29 +1,8 @@
-import unittest
-from selenium import webdriver
 from selenium.webdriver import Keys
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.events import EventFiringWebDriver
-from helpers.screenshot_listener import ScreenshotListener
+from helpers.base_test_class import BaseTestClass
 
-class LostHatSearchTests(unittest.TestCase):
-    @classmethod
-    def setUp(self):
-        self.base_url = 'https://autodemo.testoneo.com/en/'
-        # self.service = Service(
-        #     '/Users/martarakowska/Desktop/podstawy_testow_automatycznych_w_selenium_i_python/chromedriver')
-        # self.service.start()
-        # self.driver = webdriver.Remote(self.service.service_url)
-        service = webdriver.ChromeService(
-            '/Users/martarakowska/Desktop/podstawy_testow_automatycznych_w_selenium_i_python/chromedriver')
-        service.start()
-        driver = webdriver.Chrome(service=service)
-        self.ef_driver = EventFiringWebDriver(driver, ScreenshotListener())
-
-    @classmethod
-    def tearDown(self):
-        self.ef_driver.quit()
-
+class LostHatSearchTests(BaseTestClass):
     def test_sanity_search_on_main_page(self):
         search_phrase = 'Hummingbird'
         expected_element_name = 'Hummingbird Printed T-Shirt'

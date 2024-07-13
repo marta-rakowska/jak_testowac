@@ -1,23 +1,10 @@
-import unittest
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.events import EventFiringWebDriver
 from helpers.screenshot_listener import ScreenshotListener
+from helpers.base_test_class import BaseTestClass
 
-class LostHatFrontPageTests(unittest.TestCase):
-    @classmethod
-    def setUp(self):
-        self.base_url = 'https://autodemo.testoneo.com/en/'
-        service = webdriver.ChromeService('/Users/martarakowska/Desktop/podstawy_testow_automatycznych_w_selenium_i_python/chromedriver')
-        service.start()
-        driver = webdriver.Chrome(service=service)
-        self.ef_driver = EventFiringWebDriver(driver, ScreenshotListener())
-
-    @classmethod
-    def tearDown(self):
-        self.ef_driver.quit()
-
+class LostHatFrontPageTests(BaseTestClass):
     def test_slider_presence(self):
         slider_xpath = '//*[@id="carousel"]'
         driver = self.ef_driver
