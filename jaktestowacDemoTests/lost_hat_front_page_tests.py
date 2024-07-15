@@ -1,7 +1,5 @@
-from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.events import EventFiringWebDriver
-from helpers.screenshot_listener import ScreenshotListener
+
 from helpers.base_test_class import BaseTestClass
 
 class LostHatFrontPageTests(BaseTestClass):

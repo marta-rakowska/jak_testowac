@@ -16,9 +16,6 @@ class LostHatSmokeTests(unittest.TestCase):
         self.clothes_product_url = self.base_url + '3-clothes'
         self.accessories_product_url = self.base_url + '6-accessories'
         self.art_product_url = self.base_url + '9-art'
-        # self.service = Service('/Users/martarakowska/Desktop/podstawy_testow_automatycznych_w_selenium_i_python/chromedriver')
-        # self.service.start()
-        # self.driver = webdriver.Remote(self.service.service_url)
         service = webdriver.ChromeService(
             '/Users/martarakowska/Desktop/podstawy_testow_automatycznych_w_selenium_i_python/chromedriver')
         service.start()
