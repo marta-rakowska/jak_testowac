@@ -2,12 +2,14 @@ import unittest
 from selenium import webdriver
 from selenium.webdriver.support.events import EventFiringWebDriver
 from helpers.screenshot_listener import ScreenshotListener
+import config_reader
 
 
 class BaseTestClass(unittest.TestCase):
     @classmethod
     def setUp(self):
-        self.base_url = 'https://autodemo.testoneo.com/en/'
+        config = config_reader.load()
+        self.base_url = config[0].strip('\n')
         self.login_url = self.base_url + 'login'
         self.sample_product_url = self.base_url + 'men/1-1-hummingbird-printed-t-shirt.html'
         self.subpage_art_url = self.base_url + '9-art'

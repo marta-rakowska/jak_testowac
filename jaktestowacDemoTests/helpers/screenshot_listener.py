@@ -5,7 +5,14 @@ from selenium.webdriver.support.events import AbstractEventListener
 
 class ScreenshotListener(AbstractEventListener):
     def on_exception(self, exception, driver):
-        make_screenshot(driver, 'driver')
+        pycharm_debugger_exceptions = [
+            "'WebElement' object has no attribute '__len__'",
+            "'WebDriver' object has no attribute '__len__'",
+            "'WebDriver' object has no attribute 'shape'",
+            "'WebElement' object has no attribute 'shape'"
+        ]
+        if str(exception) not in pycharm_debugger_exceptions:
+            make_screenshot(driver, 'driver')
 
 def make_screenshot(driver, producer):
     screenshot_path = rf"testResults/{producer}_exception_{time.time()}.png"

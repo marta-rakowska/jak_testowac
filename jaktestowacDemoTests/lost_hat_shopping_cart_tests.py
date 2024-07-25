@@ -20,7 +20,7 @@ class LostHatShoppingCartTests(BaseTestClass):
         shopping_cart_button_element = driver.find_element(By.XPATH, shopping_cart_button_xpath)
         shopping_cart_button_element.click()
 
-        confirmation_modal_element = oh.visibility_of_element_wait(driver, confirmation_modal_title_xpath, 1)
+        confirmation_modal_element = driver.find_element(By.XPATH, confirmation_modal_title_xpath)
         self.assertEqual(expected_confirmation_modal_text, confirmation_modal_element.text)
 
 
