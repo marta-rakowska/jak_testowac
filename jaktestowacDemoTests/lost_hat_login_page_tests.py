@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from helpers import functional_helpers as fh
 from helpers.wrappers import screenshot_decorator
 from helpers.base_test_class import BaseTestClass
+import config_reader
 
 class LostHatLoginPageTests(BaseTestClass):
     def assert_element_text(self, driver, xpath, expected_text):
@@ -29,10 +30,11 @@ class LostHatLoginPageTests(BaseTestClass):
 
     @screenshot_decorator
     def test_correct_login(self):
+        config = config_reader.load()
         expected_text = 'Marta Testerka'
         user_name_xpath = '//a[@class="account"]/*[@class="hidden-sm-down"]'
-        user_email = 'marta.testerka@test.com'
-        user_pass = '0123456789'
+        user_email = config['correct_user_email']
+        user_pass = config['correct_user_pass']
         driver = self.ef_driver
 
         driver.get(self.login_url)

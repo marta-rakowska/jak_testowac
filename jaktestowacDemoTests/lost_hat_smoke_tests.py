@@ -6,18 +6,20 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.events import EventFiringWebDriver
 from helpers.screenshot_listener import ScreenshotListener
 from helpers.wrappers import screenshot_decorator
+import config_reader
+
 
 class LostHatSmokeTests(unittest.TestCase):
 
     @classmethod
     def setUp(self):
-        self.base_url = 'https://autodemo.testoneo.com/en/'
+        config = config_reader.load()
+        self.base_url = config['base_url']
         self.login_url = self.base_url + 'login'
         self.clothes_product_url = self.base_url + '3-clothes'
         self.accessories_product_url = self.base_url + '6-accessories'
         self.art_product_url = self.base_url + '9-art'
-        service = webdriver.ChromeService(
-            '/Users/martarakowska/Desktop/podstawy_testow_automatycznych_w_selenium_i_python/chromedriver')
+        service = webdriver.ChromeService(config['chromedriver_path'])
         service.start()
         driver = webdriver.Chrome(service=service)
         self.ef_driver = EventFiringWebDriver(driver, ScreenshotListener())
