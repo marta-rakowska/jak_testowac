@@ -23,7 +23,7 @@ class LostHatLoginPageTests(BaseTestClass):
     def test_login_text_header(self):
         expected_text = 'Log in to your account'
         xpath = '//header[@class="page-header"]'
-        driver = self.ef_driver
+        driver = self.conf_driver
 
         driver.get(self.login_url)
         self.assert_element_text(driver, xpath, expected_text)
@@ -35,7 +35,7 @@ class LostHatLoginPageTests(BaseTestClass):
         user_name_xpath = '//a[@class="account"]/*[@class="hidden-sm-down"]'
         user_email = config['correct_user_email']
         user_pass = config['correct_user_pass']
-        driver = self.ef_driver
+        driver = self.conf_driver
 
         driver.get(self.login_url)
         fh.user_login(driver, user_email, user_pass)
@@ -47,7 +47,7 @@ class LostHatLoginPageTests(BaseTestClass):
         alert_xpath = '//*[@class="alert alert-danger"]'
         user_email = 'invalid@test.test'
         user_pass = 'abc123'
-        driver = self.ef_driver
+        driver = self.conf_driver
 
         driver.get(self.login_url)
         fh.user_login(driver, user_email, user_pass)

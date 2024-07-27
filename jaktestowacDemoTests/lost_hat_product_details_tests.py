@@ -12,7 +12,7 @@ class LostHatProductDetailsTests(BaseTestClass):
         expected_product_default_size = 'M'
         size_select_xpath = '//*[@id="group_1"]'
 
-        driver = self.ef_driver
+        driver = self.conf_driver
         driver.get(self.man_t_shirt_url)
 
         product_size_select_element = driver.find_element(By.XPATH, size_select_xpath)
@@ -29,7 +29,7 @@ class LostHatProductDetailsTests(BaseTestClass):
     #     default_select_option_xpath = '//*[@id="group_1"]/*[@selected="selected"]'
     #     size_l_select_xpath = '//*[@id="group_1"]/*[text()="L"]'
     #
-    #     driver = self.ef_driver
+    #     driver = self.conf_driver
     #
     #     driver.get('https://autodemo.testoneo.com/en/men/1-4-hummingbird-printed-t-shirt.html')
     #     selected_size_element = driver.find_element(By.XPATH, default_select_option_xpath)
@@ -56,7 +56,7 @@ class LostHatProductDetailsTests(BaseTestClass):
         expected_product_changed_size = 'L'
         size_select_xpath = '//*[@id="group_1"]'
 
-        driver = self.ef_driver
+        driver = self.conf_driver
         driver.get('https://autodemo.testoneo.com/en/men/1-4-hummingbird-printed-t-shirt.html')
 
         product_size_select_element = driver.find_element(By.XPATH, size_select_xpath)

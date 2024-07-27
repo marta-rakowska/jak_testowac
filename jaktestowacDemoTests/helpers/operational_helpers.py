@@ -2,6 +2,7 @@ import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.remote.webelement import WebElement
 
 
 def wait_for_elements(driver, xpath, max_seconds_to_wait=5, number_of_expected_elements=1):
@@ -25,10 +26,10 @@ def wait_for_elements(driver, xpath, max_seconds_to_wait=5, number_of_expected_e
                                             f'found {len(elements)} for xpath {xpath} in time of {max_seconds_to_wait}s')
         time.sleep(1)
 
-def visibility_of_element_wait(driver, xpath, timeout=10):
+def visibility_of_element_wait(driver, xpath, timeout=10) -> WebElement:
     """Checking if element specified by xpath is visible on page
 
-        :param  driver: webdriver instance
+        :param  driver: webdriver or event firing webdriver instance
         :param xpath: xpath of web element
         :param timeout: time after looking for element will be stopped (default: 10)
         :return: first element in list of found elements
@@ -36,7 +37,10 @@ def visibility_of_element_wait(driver, xpath, timeout=10):
     timeout_message = f"Element for xpath: '{xpath}' and url: {driver.current_url} not found in {timeout} seconds"
     locator = (By.XPATH, xpath)
     element_located = EC.visibility_of_element_located(locator)
-    # wait = WebDriverWait(driver, timeout)
-    wait = WebDriverWait(driver.wrapped_driver, timeout)
+    if hasattr(driver, 'wrapped_driver'):
+        unwrapped_driver = driver.wrapped_driver
+        wait = WebDriverWait(unwrapped_driver, timeout)
+    else:
+        wait = WebDriverWait(driver, timeout)
     return wait.until(element_located, timeout_message)
 

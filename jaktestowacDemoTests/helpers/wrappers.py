@@ -6,10 +6,10 @@ def screenshot_decorator(test_fun):
         try:
             return test_fun(self)
         except AssertionError as ex:
-            make_screenshot(self.ef_driver, 'assert')
+            make_screenshot(self.conf_driver, 'assert')
             raise ex
         except TimeoutException as ex:
-            make_screenshot(self.ef_driver, 'timeout')
+            make_screenshot(self.conf_driver, 'timeout')
             raise ex
 
     return wrapper

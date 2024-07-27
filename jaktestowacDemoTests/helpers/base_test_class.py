@@ -18,8 +18,11 @@ class BaseTestClass(unittest.TestCase):
         service = webdriver.ChromeService(config['chromedriver_path'])
         service.start()
         driver = webdriver.Chrome(service=service)
-        self.ef_driver = EventFiringWebDriver(driver, ScreenshotListener())
+        if config['event_firing_driver']:
+            self.conf_driver = EventFiringWebDriver(driver, ScreenshotListener())
+        else:
+            self.conf_driver = driver
 
     @classmethod
     def tearDown(self):
-        self.ef_driver.quit()
+        self.conf_driver.quit()

@@ -19,7 +19,7 @@ class LostHatProductPageTests(BaseTestClass):
     def test_check_product_name(self):
         expected_product_name = 'HUMMINGBIRD PRINTED T-SHIRT'
         name_xpath = '//*[@class="col-md-6"]//*[@itemprop="name"]'
-        driver = self.ef_driver
+        driver = self.conf_driver
 
         driver.get(self.sample_product_url)
         self.assert_element_text(driver, name_xpath, expected_product_name)
@@ -27,7 +27,7 @@ class LostHatProductPageTests(BaseTestClass):
     def test_check_product_price(self):
         expected_product_price = 'PLN23.52'
         price_xpath = '//*[@class="current-price"]//*[@itemprop="price"]'
-        driver = self.ef_driver
+        driver = self.conf_driver
 
         driver.get(self.sample_product_url)
         self.assert_element_text(driver, price_xpath, expected_product_price)

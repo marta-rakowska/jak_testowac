@@ -9,12 +9,12 @@ class LostHatSearchTests(BaseTestClass):
         search_input_xpath = '//*[@name="s"]'
         result_element_xpath = '//*[@class="product-miniature js-product-miniature"]'
 
-        self.ef_driver.get(self.base_url)
-        search_input_element = self.ef_driver.find_element(By.XPATH, search_input_xpath)
+        self.conf_driver.get(self.base_url)
+        search_input_element = self.conf_driver.find_element(By.XPATH, search_input_xpath)
         search_input_element.send_keys(search_phrase)
         search_input_element.send_keys(Keys.ENTER)
 
-        result_elements = self.ef_driver.find_elements(By.XPATH, result_element_xpath)
+        result_elements = self.conf_driver.find_elements(By.XPATH, result_element_xpath)
         found_elements_number = 0
         for element in result_elements:
             if expected_element_name in element.text:
