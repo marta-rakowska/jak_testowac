@@ -3,5 +3,6 @@
   "chromedriver_path":  "/Users/martarakowska/Desktop/podstawy_testow_automatycznych_w_selenium_i_python/chromedriver",
   "correct_user_email": "marta.testerka@test.com",
   "correct_user_pass": "0123456789",
+  "correct_user_fullname": "Marta Testerka",
   "event_firing_driver": true
 }
