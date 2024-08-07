@@ -1,14 +1,14 @@
 import unittest
 from selenium import webdriver
 from selenium.webdriver.support.events import EventFiringWebDriver
-from helpers.screenshot_listener import ScreenshotListener
-import config_reader
+from jaktestowacDemoTests.helpers.screenshot_listener import ScreenshotListener
+import jaktestowacDemoTests.config_reader
 
 
 class BaseTestClass(unittest.TestCase):
     @classmethod
     def setUp(self):
-        config = config_reader.load()
+        config = jaktestowacDemoTests.config_reader.load()
         # self.base_url = config[0].strip('\n')
         self.base_url = config['base_url']
         self.login_url = self.base_url + 'login'

@@ -7,6 +7,7 @@ import json
 #         config = file.readlines()
 #         return config
 
+
 def load():
     config_path = os.path.join(os.path.dirname(__file__), 'config', 'configuration.json')
     with open(config_path, 'r') as file:

@@ -1,6 +1,7 @@
 from jaktestowacDemoTests.helpers.screenshot_listener import make_screenshot
 from selenium.common.exceptions import TimeoutException
 
+
 def screenshot_decorator(test_fun):
     def wrapper(self):
         try:
